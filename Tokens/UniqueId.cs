@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml;
 using RobloxFiles.DataTypes;
+using UniqueId = RobloxFiles.DataTypes.UniqueId;
 
 namespace RobloxFiles.Tokens
 {
