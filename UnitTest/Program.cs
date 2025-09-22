@@ -53,6 +53,7 @@ namespace RobloxFiles.UnitTest
             Debugger.Break();
         }
         
+        /*
         [STAThread]
         static void Main(string[] args)
         {
@@ -78,5 +79,6 @@ namespace RobloxFiles.UnitTest
                 Debugger.Break();
             }
         }
+        */
     }
 }
