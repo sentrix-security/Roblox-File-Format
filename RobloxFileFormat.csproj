@@ -38,10 +38,6 @@
     <ItemGroup>
         <None Include="FodyWeavers.xml" />
     </ItemGroup>
-    
-    <Target Name="CopyOut" AfterTargets="Build">
-      <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ProjectDir)" />
-    </Target>
 
     <PropertyGroup>
         <DefaultItemExcludes>$(DefaultItemExcludes);UnitTest/**</DefaultItemExcludes>
