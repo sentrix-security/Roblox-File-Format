@@ -1,0 +1,80 @@
+name: .NET Core Desktop
+
+on:
+  push:
+    tags:
+      - v* # e.g. v1.0.0
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 9 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/Directory.Packages.props', '**/global.json') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Add GitHub Packages source
+        run: |
+          dotnet nuget add source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+            --name github \
+            --username ${{ github.repository_owner }} \
+            --password ${{ secrets.GITHUB_TOKEN }} \
+            --store-password-in-clear-text
+
+      - name: Determine package version from tag
+        id: version
+        run: |
+          # Tag format: v1.2.3 -> 1.2.3
+          ver="${GITHUB_REF_NAME#v}"
+          echo "version=$ver" >> "$GITHUB_OUTPUT"
+
+      
+      - name: Locate csproj
+        id: findproj
+        run: |
+          file=$(git ls-files | grep -E '/?RobloxFileFormat\.csproj$' | head -n1)
+          if [ -z "$file" ]; then
+            echo "RobloxFileFormat.csproj not found." >&2
+            exit 1
+          fi
+          echo "csproj=$file" >> "$GITHUB_OUTPUT"
+
+      - name: Restore
+        run: dotnet restore "${{ steps.findproj.outputs.csproj }}"
+
+      - name: Build
+        run: dotnet build "${{ steps.findproj.outputs.csproj }}" -c Release --no-restore
+
+      - name: Test (optional)
+        run: dotnet test -c Release --no-build
+        continue-on-error: true
+
+      - name: Pack
+        run: |
+          dotnet pack "${{ steps.findproj.outputs.csproj }}" -c Release \
+            -o ./nupkgs \
+            -p:PackageVersion=${{ steps.version.outputs.version }} \
+            -p:ContinuousIntegrationBuild=true
+
+      - name: Publish to GitHub Packages
+        run: dotnet nuget push "./nupkgs/*.nupkg" --source github --skip-duplicate
