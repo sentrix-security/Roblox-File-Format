@@ -74,7 +74,8 @@ jobs:
           dotnet pack "${{ steps.findproj.outputs.csproj }}" -c Release \
             -o ./nupkgs \
             -p:PackageVersion=${{ steps.version.outputs.version }} \
-            -p:ContinuousIntegrationBuild=true
+            -p:ContinuousIntegrationBuild=true \
+            -p:PackageID=Sentrix.RobloxFileFormat
 
       - name: Publish to GitHub Packages
         run: dotnet nuget push "./nupkgs/*.nupkg" --source github --skip-duplicate
