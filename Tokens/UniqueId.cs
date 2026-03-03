@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Xml;
-using RobloxFiles.DataTypes;
-using UniqueId = RobloxFiles.DataTypes.UniqueId;
+using RUniqueId = RobloxFiles.DataTypes.UniqueId;
 
 namespace RobloxFiles.Tokens
 {
@@ -28,7 +27,7 @@ namespace RobloxFiles.Tokens
                 var time = BitConverter.ToUInt32(bytes, 4);
                 var index = BitConverter.ToUInt32(bytes, 0);
 
-                var uniqueId = new UniqueId(rand, time, index);
+                var uniqueId = new RUniqueId(rand, time, index);
                 prop.Value = uniqueId;
 
                 return true;
@@ -39,7 +38,7 @@ namespace RobloxFiles.Tokens
 
         public void WriteProperty(Property prop, XmlDocument doc, XmlNode node)
         {
-            var uniqueId = prop.CastValue<UniqueId>();
+            var uniqueId = prop.CastValue<RUniqueId>();
 
             var random = BitConverter.GetBytes(uniqueId.Random);
             var time = BitConverter.GetBytes(uniqueId.Time);

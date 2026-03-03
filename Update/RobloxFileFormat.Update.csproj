@@ -1,26 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>RobloxFileFormat.Update</RootNamespace>
+    <OutputType>Exe</OutputType>
     <AssemblyName>RobloxFileFormat.Update</AssemblyName>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <RootNamespace>RobloxFileFormat.Update</RootNamespace>
+    <UseWindowsForms>false</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
-  <!-- Let SDK include .cs files automatically. No explicit Compile includes needed. -->
+
   <ItemGroup>
-    <None Include="Null.rbxlx" />
-    <None Include="Plugin\**\*" />
+    <None Include="Null.rbxlx" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\default.project.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\GenerateApiDump\BrickColors.luau" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\GenerateApiDump\Formatting.luau" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\GenerateApiDump\init.server.luau" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\GenerateApiDump\LegacyFonts.luau" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\GenerateApiDump\LostEnumValues.luau" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\GenerateApiDump\PropertyPatches.luau" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\make" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Plugin\sourcemap.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+
+
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="**/obj/**" />
+    <Compile Remove="**/bin/**" />
     <None Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <PostBuildEvent>echo Copying $(TargetFileName)...
+copy /y "$(TargetDir)$(TargetFileName)" "$(ProjectDir)$(TargetFileName)"
+echo Done!</PostBuildEvent>
+  </PropertyGroup>
 </Project>

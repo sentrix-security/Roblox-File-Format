@@ -1,56 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>RobloxFileFormat</AssemblyName>
+    <RootNamespace>RobloxFiles</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <AssemblyName>RobloxFileFormat</AssemblyName>
-        <RootNamespace>RobloxFiles</RootNamespace>
-        <LangVersion>13.0</LangVersion>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="K4os.Compression.LZ4" Version="1.3.8" />
+    <PackageReference Include="Konscious.Security.Cryptography.Blake2" Version="1.0.9" />
+    <PackageReference Include="ZstdSharp.Port" Version="0.6.5" />
+  </ItemGroup>
 
-        <!-- Do not double-generate AssemblyInfo.cs -->
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        
-    </PropertyGroup>
-
-    <!-- NuGet-Dependencies -->
-    <ItemGroup>
-        <!-- Core-Packages -->
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="K4os.Compression.LZ4" Version="1.3.8" />
-        <PackageReference Include="ZstdSharp.Port" Version="0.8.6" />
-        <PackageReference Include="Konscious.Security.Cryptography.Blake2" Version="1.1.1" />
-
-        <!-- Only needed for net472 -->
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" Condition="'$(TargetFramework)' == 'net472'" />
-        <PackageReference Include="System.Buffers" Version="4.5.1" Condition="'$(TargetFramework)' == 'net472'" />
-        <PackageReference Include="System.Memory" Version="4.5.5" Condition="'$(TargetFramework)' == 'net472'" />
-        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" Condition="'$(TargetFramework)' == 'net472'" />
-        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" Condition="'$(TargetFramework)' == 'net472'" />
-        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" Condition="'$(TargetFramework)' == 'net472'" />
-
-        <!-- Fody/Costura -->
-        <PackageReference Include="Fody" Version="6.*" PrivateAssets="all" />
-        <PackageReference Include="Costura.Fody" Version="6.*" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="FodyWeavers.xml" />
-    </ItemGroup>
-
-    <PropertyGroup>
-        <DefaultItemExcludes>$(DefaultItemExcludes);UnitTest/**</DefaultItemExcludes>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <Compile Remove="UnitTest/**" />
-        <EmbeddedResource Remove="UnitTest/**" />
-        <None Remove="UnitTest/**" />
-        <Compile Remove="Update/**" />
-        <EmbeddedResource Remove="Update/**" />
-        <None Remove="Update/**" />
-    </ItemGroup>
-    
-
+  <ItemGroup>
+    <Compile Remove="Properties/AssemblyInfo.cs" />
+    <Compile Remove="**/obj/**" />
+    <Compile Remove="**/bin/**" />
+    <None Include="Properties/AssemblyInfo.cs" />
+  </ItemGroup>
 </Project>
