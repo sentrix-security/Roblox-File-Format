@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <AssemblyName>RobloxFileFormat</AssemblyName>
         <RootNamespace>RobloxFiles</RootNamespace>
+        <LangVersion>13.0</LangVersion>
 
         <!-- Do not double-generate AssemblyInfo.cs -->
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
