@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,4 +30,8 @@
     <ProjectReference Include="..\RobloxFileFormat.csproj" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Compile Remove="**/obj/**" />
+    <Compile Remove="**/bin/**" />
+  </ItemGroup>
 </Project>
