@@ -9,7 +9,6 @@
         <!-- Do not double-generate AssemblyInfo.cs -->
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         
-        <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         
