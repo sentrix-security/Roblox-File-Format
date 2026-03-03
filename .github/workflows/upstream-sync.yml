@@ -1,0 +1,56 @@
+name: Sync upstream and open PR
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"   # every 12 hours
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream and fetch
+        run: |
+          git remote add upstream https://github.com/MaximumADHD/Roblox-File-Format.git
+          git fetch upstream --prune
+          git fetch origin --prune
+
+      - name: Create or update sync branch
+        run: |
+          BASE_BRANCH="main"
+          UPSTREAM_BRANCH="main"
+          SYNC_BRANCH="sync/upstream"
+
+          git checkout -B "$SYNC_BRANCH" "origin/$BASE_BRANCH"
+
+          # Merge upstream into the sync branch. If conflicts occur, this step fails (which is good).
+          git merge --no-edit "upstream/$UPSTREAM_BRANCH"
+
+          # Push the sync branch
+          git push -u origin "$SYNC_BRANCH" --force-with-lease
+
+      - name: Create or update PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: sync/upstream
+          base: main
+          title: "Sync upstream changes"
+          body: |
+            Automated PR to bring upstream changes into this fork.
+            If there are conflicts, resolve them in this PR.
+          labels: |
+            upstream-sync
