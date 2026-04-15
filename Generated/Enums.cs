@@ -1,5 +1,5 @@
 // Auto-generated list of Roblox enums.
-// Updated as of 0.710.0.7100702
+// Updated as of 0.716.0.7160873
 using System;
 
 namespace RobloxFiles.Enums
@@ -58,6 +58,16 @@ namespace RobloxFiles.Enums
         Lose,
         Draw,
         Win,
+    }
+
+    public enum ActivePayerStatus
+    {
+        Unknown,
+        Never,
+        Lapsed,
+        Casual50Percent,
+        Intermediate35Percent,
+        Top15Percent,
     }
 
     public enum ActuatorRelativeTo
@@ -264,8 +274,14 @@ namespace RobloxFiles.Enums
     public enum AnimationNodeInterruptible
     {
         Always,
-        ClipFinished,
-        Expression,
+        Finished,
+        Trigger,
+    }
+
+    public enum AnimationNodePhaseSync
+    {
+        Synced,
+        Unsynced,
     }
 
     public enum AnimationNodePlayMode
@@ -287,7 +303,7 @@ namespace RobloxFiles.Enums
     {
         InvalidNode,
         AddNode,
-        BlendNode,
+        OverNode,
         Blend1DNode,
         Blend2DNode,
         ClipNode,
@@ -303,8 +319,8 @@ namespace RobloxFiles.Enums
 
     public enum AnimationNodeWaitFor
     {
-        ClipFinished,
-        Expression,
+        Finished,
+        Trigger,
     }
 
     public enum AnimationPriority
@@ -732,6 +748,12 @@ namespace RobloxFiles.Enums
         CustomBuild,
     }
 
+    public enum AvatarSettingsCharacterControllerMode
+    {
+        LegacyHumanoid,
+        LuaCharacterController,
+    }
+
     public enum AvatarSettingsClothingMode
     {
         PlayerChoice,
@@ -985,6 +1007,18 @@ namespace RobloxFiles.Enums
         Custom,
         Scriptable,
         Orbital,
+    }
+
+    public enum CanCollaborateError
+    {
+        Invalid,
+        None,
+        NotAgeVerified,
+        OutsideAgeBucket,
+        TooManyCollaborators,
+        PCBlock,
+        NotFound,
+        OutsideOwnerAgeBucket,
     }
 
     public enum CaptureGalleryPermission
@@ -1365,6 +1399,7 @@ namespace RobloxFiles.Enums
         PlacelaunchHttpError,
         PlacelaunchUserPrivacyUnauthorized = 533,
         PlacelaunchCreatorBan = 600,
+        PlacelaunchDeviceBlock,
         PlacelaunchCustomMessage = 610,
         PlacelaunchOtherError,
         TeleportErrors = 768,
@@ -1437,6 +1472,15 @@ namespace RobloxFiles.Enums
         Success = 1,
         PermissionDenied,
         UploadFailed,
+        Unknown,
+    }
+
+    public enum CreateContentResult
+    {
+        Success = 1,
+        PermissionDenied,
+        UploadFailed,
+        StorageLimitExceeded,
         Unknown,
     }
 
@@ -1651,12 +1695,20 @@ namespace RobloxFiles.Enums
         High,
     }
 
+    public enum DeviceSimulatorScalingMode
+    {
+        ScaleToPhysicalSize,
+        ActualResolution,
+        FitToWindow,
+    }
+
     public enum DeviceType
     {
         Unknown,
         Desktop,
         Tablet,
         Phone,
+        TV,
     }
 
     public enum DialogBehaviorType
@@ -1679,6 +1731,18 @@ namespace RobloxFiles.Enums
         Enemy,
     }
 
+    public enum DigitsRigDescriptionSide
+    {
+        None,
+        Left,
+        Right,
+    }
+
+    public enum DiscountType
+    {
+        Uncategorized,
+    }
+
     public enum DisplayScalingMode
     {
         Default,
@@ -1691,6 +1755,13 @@ namespace RobloxFiles.Enums
         Small,
         Medium,
         Large,
+    }
+
+    public enum DomainType
+    {
+        EXPERIENCE = 1,
+        GROUP,
+        OAUTH,
     }
 
     public enum DominantAxis
@@ -1856,6 +1927,12 @@ namespace RobloxFiles.Enums
 
         [Obsolete]
         CratersAndDebris = Craters,
+    }
+
+    public enum ExternalEditorMode
+    {
+        SystemDefault,
+        CustomEditor,
     }
 
     public enum FACSDataLod
@@ -2275,13 +2352,6 @@ namespace RobloxFiles.Enums
         CoreBillboards,
     }
 
-    public enum HandRigDescriptionSide
-    {
-        None,
-        Left,
-        Right,
-    }
-
     public enum HandlesStyle
     {
         Resize,
@@ -2514,6 +2584,13 @@ namespace RobloxFiles.Enums
         Direction2D,
         Direction3D,
         ViewportPosition,
+    }
+
+    public enum InputSink
+    {
+        None,
+        Activate,
+        All = 100,
     }
 
     public enum InputType
@@ -3731,6 +3808,12 @@ namespace RobloxFiles.Enums
         Roblox,
     }
 
+    public enum PhysicalConstraintType
+    {
+        AnimationConstraint,
+        Motor6D,
+    }
+
     public enum PhysicsSimulationRate
     {
         Fixed240Hz,
@@ -3842,6 +3925,19 @@ namespace RobloxFiles.Enums
         CreatorKick,
     }
 
+    public enum PlayerPlatformSpenderStatus
+    {
+        Unknown,
+        Active,
+        OtherPayer,
+    }
+
+    public enum PluginConnectionTargetType
+    {
+        Edit,
+        Test,
+    }
+
     public enum PoseEasingDirection
     {
         In,
@@ -3892,6 +3988,14 @@ namespace RobloxFiles.Enums
         Large,
         Larger,
         Largest,
+    }
+
+    public enum PrefetchDownloadStatus
+    {
+        NotStarted,
+        InProgress,
+        Completed,
+        Failed,
     }
 
     public enum PrimalPhysicsSolver
@@ -4022,6 +4126,12 @@ namespace RobloxFiles.Enums
         Custom,
     }
 
+    public enum PurchaseOption
+    {
+        TimedOption = 1,
+        Permanent,
+    }
+
     public enum QualityLevel
     {
         Automatic,
@@ -4133,6 +4243,19 @@ namespace RobloxFiles.Enums
     {
         Success,
         NeedPermission,
+    }
+
+    public enum ReceiptDecision
+    {
+        NotProcessedYet,
+        Processed,
+    }
+
+    public enum ReceiptType
+    {
+        DeveloperProduct,
+        RobuxTransferSender,
+        RobuxTransferReceiver,
     }
 
     public enum RecommendationActionType
@@ -4321,13 +4444,28 @@ namespace RobloxFiles.Enums
         RightElbow,
         RightWrist,
         Neck = 20,
-        Pelvis = 23,
+        Spine = 23,
         Chest,
         HeadBase,
         LeftClavicle,
         RightClavicle,
-        LeftToes,
-        RightToes,
+        LeftToeBase,
+        RightToeBase,
+        Thumb1,
+        Thumb2,
+        Thumb3,
+        Index1,
+        Index2,
+        Index3,
+        Middle1,
+        Middle2,
+        Middle3,
+        Ring1,
+        Ring2,
+        Ring3,
+        Pinky1,
+        Pinky2,
+        Pinky3,
     }
 
     public enum RigScale
@@ -4530,7 +4668,10 @@ namespace RobloxFiles.Enums
         RunClientScript,
         RunServerScript,
         AccessOutsideWrite,
+
+        [Obsolete]
         AssetRequire,
+
         LoadString,
         ScriptGlobals,
         CreateInstances,
@@ -4543,7 +4684,10 @@ namespace RobloxFiles.Enums
         CSG,
         Chat,
         Animation,
+
+        [Obsolete]
         Avatar,
+
         Input,
         Environment,
         RemoteEvent,
@@ -4578,6 +4722,8 @@ namespace RobloxFiles.Enums
         Consequences,
         Material,
         AvatarBehavior,
+        AvatarAppearance,
+        LoadUnownedAsset,
     }
 
     public enum SelectionBehavior
@@ -4606,6 +4752,7 @@ namespace RobloxFiles.Enums
     {
         Floor,
         Ladder,
+        ClassicLadder,
     }
 
     public enum SensorUpdateType
@@ -4659,6 +4806,13 @@ namespace RobloxFiles.Enums
         RelativeXY,
         RelativeXX,
         RelativeYY,
+    }
+
+    public enum SolidPrimitiveType
+    {
+        Capsule = 5,
+        Cone,
+        RoundedBox,
     }
 
     public enum SolverConvergenceMetricType
@@ -4766,6 +4920,20 @@ namespace RobloxFiles.Enums
     {
         FixedSize,
         ScaledSize,
+    }
+
+    public enum StudioCaptureBufferStatus
+    {
+        NotStarted,
+        Pending,
+        Ready,
+        Error,
+    }
+
+    public enum StudioCaptureScreenshotFormat
+    {
+        RGBA8,
+        PNG,
     }
 
     public enum StudioCloseMode
@@ -5577,6 +5745,8 @@ namespace RobloxFiles.Enums
         CaptureNotInGallery,
         IneligibleCapture,
         UploadQuotaReached,
+        UploadPending,
+        UploadFailed,
     }
 
     public enum UsageContext
@@ -5842,6 +6012,7 @@ namespace RobloxFiles.Enums
         Unknown,
         Migration,
         CloseRoom,
+        FAEUpdate,
     }
 
     public enum VolumetricAudio
@@ -5898,6 +6069,16 @@ namespace RobloxFiles.Enums
         All,
         None,
         Touching,
+    }
+
+    public enum WhenUserFirstPlayed
+    {
+        Unknown,
+        Days0To30,
+        Days31To90,
+        Days91To180,
+        Days181To365,
+        Days366Plus,
     }
 
     public enum WhisperChatPrivacyMode
