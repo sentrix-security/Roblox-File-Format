@@ -44,13 +44,22 @@ jobs:
           git push -u origin "$SYNC_BRANCH" --force-with-lease
 
       - name: Create or update PR
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: sync/upstream
-          base: main
-          title: "Sync upstream changes"
-          body: |
-            Automated PR to bring upstream changes into this fork.
-            If there are conflicts, resolve them in this PR.
-          labels: |
-            upstream-sync
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if upstream is actually ahead before doing anything
+          AHEAD=$(git rev-list --right-only --count origin/main...origin/sync/upstream)
+          echo "sync/upstream is $AHEAD commits ahead of main"
+          
+          if [ "$AHEAD" -eq 0 ]; then
+            echo "Nothing to sync, skipping PR."
+            exit 0
+          fi
+      
+          gh pr create \
+            --head sync/upstream \
+            --base main \
+            --title "Sync upstream changes" \
+            --body "Automated PR to bring upstream changes into this fork." \
+            --label upstream-sync \
+          || echo "PR already exists, skipping."
