@@ -1,5 +1,5 @@
 // Auto-generated list of creatable Roblox classes.
-// Updated as of 0.732.0.7321040
+// Updated as of 0.734.0.7340915
 
 using System;
 
@@ -497,6 +497,15 @@ namespace RobloxFiles
         public float Shape = 0;
         public float Skew = 0;
         public float Square = 0;
+    }
+
+    public class AudioWindSynthesizer : Instance
+    {
+        public bool Enabled = true;
+        public Instance PositionInstance = null;
+        public AudioPositionType PositionType = AudioPositionType.Parent;
+        public WindSoundProfile Profile = WindSoundProfile.Turbulence;
+        public float Volume = 1;
     }
 
     [RbxService]
@@ -1891,6 +1900,9 @@ namespace RobloxFiles
     [RbxService]
     public class DeferredAssetManagerService : Instance
     {
+        public long JoiningPlaceId = 0;
+        public long JoiningUniverseId = 0;
+        public bool PregameLoadingScreenOnly;
     }
 
     [RbxService]
@@ -4649,6 +4661,10 @@ namespace RobloxFiles
         }
     }
 
+    public class ViewportCamera : Camera
+    {
+    }
+
     public class Model : PVInstance
     {
         public ModelLevelOfDetail LevelOfDetail = ModelLevelOfDetail.Automatic;
@@ -4943,6 +4959,13 @@ namespace RobloxFiles
         public bool AreTimestepsShown;
         public bool AreUnalignedPartsShown;
         public bool AreWorldCoordsShown;
+        public bool CollisionGeomDrawOriginalParts;
+        public bool CollisionGeomMatchPartTransparency;
+        public float CollisionGeomOverlayTransparency = 0;
+        public bool CollisionGeomShowCollidableParts;
+        public string CollisionGeomShowCollisionGroup = "";
+        public bool CollisionGeomShowQueryableParts;
+        public bool CollisionGeomShowTouchableParts;
         public bool DisableCSGv2;
         public bool DisableCSGv3ForPlugins;
         public bool DrawConstraintsNetForce;
@@ -6707,8 +6730,10 @@ namespace RobloxFiles
         public UDim BlurRadius = new UDim();
         public Color3 Color = new Color3();
         public bool Enabled = true;
+        public bool Inset;
         public ApplyShadowMode Mode = ApplyShadowMode.Shape;
         public UDim2 Offset = new UDim2();
+        public bool ShowBehindParent = true;
         public UDim2 Spread = new UDim2();
         public float Transparency = 0;
         public int ZIndex = -1;

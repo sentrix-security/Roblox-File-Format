@@ -1,5 +1,5 @@
 // Auto-generated list of Roblox enums.
-// Updated as of 0.733.0.7330989
+// Updated as of 0.734.0.7340915
 using System;
 
 namespace RobloxFiles.Enums
@@ -95,17 +95,12 @@ namespace RobloxFiles.Enums
         PublisherIneligible,
     }
 
+    [Obsolete]
     public enum AdEventType
     {
-        [Obsolete]
         VideoLoaded,
-
-        [Obsolete]
         VideoRemoved,
-
-        [Obsolete]
         UserCompletedVideo,
-
         RewardedAdLoaded,
         RewardedAdGrant,
         RewardedAdUnloaded,
@@ -597,6 +592,12 @@ namespace RobloxFiles.Enums
         Bandpass,
         Notch,
         Lowpass6dB,
+    }
+
+    public enum AudioPositionType
+    {
+        Parent,
+        Instance,
     }
 
     public enum AudioSimulationFidelity
@@ -1570,6 +1571,14 @@ namespace RobloxFiles.Enums
         Follow,
     }
 
+    public enum DataModelChangeType
+    {
+        Add,
+        Remove,
+        Modify,
+        AddPackage,
+    }
+
     public enum DataModelExtractorFileType
     {
         PlaceFile,
@@ -2356,6 +2365,14 @@ namespace RobloxFiles.Enums
         FriendRequestReceived,
     }
 
+    public enum FrustumStreamingMode
+    {
+        Default,
+        Enabled,
+        Disabled,
+        Automatic,
+    }
+
     public enum FunctionalTestResult
     {
         Passed,
@@ -2681,6 +2698,7 @@ namespace RobloxFiles.Enums
         Multiply,
         AlphaBlend,
         NormalMapBlend,
+        Subtract,
     }
 
     public enum InOut
@@ -5073,7 +5091,28 @@ namespace RobloxFiles.Enums
         None,
         LOD,
         Meshes,
-        Zone = 5,
+        MeshResourcePtr,
+        ContentId,
+        Zone,
+        TranscoderStatus,
+    }
+
+    public enum SlimTranscoderStatus
+    {
+        Unknown,
+        NoHash,
+        NotUploaded,
+        Uploaded,
+        InProgress,
+        Succeeded,
+        Failed,
+    }
+
+    public enum SlimViewContext
+    {
+        Player,
+        Editor,
+        ImGui,
     }
 
     public enum SolidPrimitiveType
@@ -6205,6 +6244,12 @@ namespace RobloxFiles.Enums
         Vector,
     }
 
+    public enum VerifiedLevel
+    {
+        Low,
+        High,
+    }
+
     public enum VerticalAlignment
     {
         Center,
@@ -6422,6 +6467,13 @@ namespace RobloxFiles.Enums
     {
         AllUsers,
         NoOne,
+    }
+
+    public enum WindSoundProfile
+    {
+        Turbulence,
+        Whistle,
+        Foliage,
     }
 
     public enum WindowState
