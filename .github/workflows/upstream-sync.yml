@@ -47,19 +47,35 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Check if upstream is actually ahead before doing anything
           AHEAD=$(git rev-list --right-only --count origin/main...origin/sync/upstream)
           echo "sync/upstream is $AHEAD commits ahead of main"
-          
+
           if [ "$AHEAD" -eq 0 ]; then
             echo "Nothing to sync, skipping PR."
             exit 0
           fi
-      
-          gh pr create \
-            --head sync/upstream \
-            --base main \
-            --title "Sync upstream changes" \
-            --body "Automated PR to bring upstream changes into this fork." \
-            --label upstream-sync \
-          || echo "PR already exists, skipping."
+
+          # Look for any existing PR (open OR closed) for this head branch
+          EXISTING=$(gh pr list --head sync/upstream --state all \
+            --json number,state --jq '.[0]')
+
+          if [ -z "$EXISTING" ]; then
+            echo "No existing PR found, creating one."
+            gh pr create \
+              --head sync/upstream \
+              --base main \
+              --title "Sync upstream changes" \
+              --body "Automated PR to bring upstream changes into this fork." \
+              --label upstream-sync
+          else
+            NUMBER=$(echo "$EXISTING" | jq -r '.number')
+            STATE=$(echo "$EXISTING" | jq -r '.state')
+            echo "Found PR #$NUMBER with state $STATE"
+
+            if [ "$STATE" = "OPEN" ]; then
+              echo "PR already open, nothing to do (branch was force-pushed with new commits)."
+            elif [ "$STATE" = "CLOSED" ]; then
+              echo "Reopening closed PR #$NUMBER."
+              gh pr reopen "$NUMBER"
+            fi
+          fi
