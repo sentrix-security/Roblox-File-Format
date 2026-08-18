@@ -1,5 +1,5 @@
 // Auto-generated list of creatable Roblox classes.
-// Updated as of 0.734.0.7340915
+// Updated as of 0.735.0.7351131
 
 using System;
 
@@ -535,7 +535,6 @@ namespace RobloxFiles
         public bool EnableRunning;
         public bool EnableSitting;
         public bool EnableSprinting;
-        public bool EnableStrafing;
         public bool EnableSwimming;
     }
 
@@ -999,6 +998,11 @@ namespace RobloxFiles
         public Color3 Color = new Color3();
         public string HeadShape = "";
         public Instance Instance = null;
+    }
+
+    [RbxService]
+    public class BranchService : Instance
+    {
     }
 
     public class Breakpoint : Instance
@@ -3596,6 +3600,11 @@ namespace RobloxFiles
     }
 
     [RbxService]
+    public class IntentService : Instance
+    {
+    }
+
+    [RbxService]
     public class InternalMessagingService : Instance
     {
     }
@@ -4739,6 +4748,7 @@ namespace RobloxFiles
         public Camera CurrentCamera = null;
         public double DistributedGameTime = 0;
         public RolloutState EnableSLIMAvatars = RolloutState.Default;
+        public RolloutState ExpandedTerrain = RolloutState.Default;
         public bool ExplicitAutoJoints = true;
         public bool FallHeightEnabled = true;
         public float FallenPartsDestroyHeight = -500;
@@ -5023,6 +5033,11 @@ namespace RobloxFiles
     [RbxService]
     public class PlatformLibraries : Instance
     {
+    }
+
+    public class PlayerControlState : Instance
+    {
+        public byte[] StateSchema;
     }
 
     [RbxService]
@@ -5517,6 +5532,11 @@ namespace RobloxFiles
 
     [RbxService]
     public class ScriptRegistrationService : Instance
+    {
+    }
+
+    [RbxService]
+    public class ScriptScannerService : Instance
     {
     }
 
@@ -6044,7 +6064,6 @@ namespace RobloxFiles
     public class StudioCameraService : Instance
     {
         public float FocusDistance = 0;
-        public bool LockCameraSpeed;
         public bool LoggingEnabled;
     }
 

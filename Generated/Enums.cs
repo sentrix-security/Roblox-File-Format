@@ -1,5 +1,5 @@
 // Auto-generated list of Roblox enums.
-// Updated as of 0.734.0.7340915
+// Updated as of 0.735.0.7351131
 using System;
 
 namespace RobloxFiles.Enums
@@ -2807,6 +2807,11 @@ namespace RobloxFiles.Enums
         AncestorErrored,
     }
 
+    [Obsolete]
+    public enum IntentReplicability
+    {
+    }
+
     public enum IntermediateMeshGenerationResult
     {
         HighQualityMesh,
@@ -3892,6 +3897,22 @@ namespace RobloxFiles.Enums
         Own,
     }
 
+    public enum PageMilestoneType
+    {
+        Interactive,
+        SurfaceMounted,
+        FunctionallyReady,
+        SurfaceReady,
+    }
+
+    public enum PageType
+    {
+        AvatarEditor,
+        Party,
+        ExperienceDetail,
+        AvatarMarketplace,
+    }
+
     public enum PartType
     {
         Ball,
@@ -4903,6 +4924,13 @@ namespace RobloxFiles.Enums
         NoSpaceOnDevice,
     }
 
+    public enum ScriptScannerUpdateType
+    {
+        Init,
+        Added,
+        Removed,
+    }
+
     public enum ScriptStoppedReason
     {
         Breakpoint,
@@ -5181,6 +5209,13 @@ namespace RobloxFiles.Enums
         Vector2,
         Vector3,
         INVALID,
+    }
+
+    public enum StateReferenceFrame
+    {
+        CurrentState,
+        PreviousState,
+        LastObservedState,
     }
 
     [Obsolete]
@@ -5593,11 +5628,6 @@ namespace RobloxFiles.Enums
     {
         RowMajor,
         ColumnMajor,
-    }
-
-    [Obsolete]
-    public enum TagReplicability
-    {
     }
 
     public enum TeamCreateErrorState
