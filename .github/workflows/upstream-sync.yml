@@ -48,6 +48,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh label create upstream-sync \
+            --repo "${{ github.repository }}" \
             --description "Automated upstream sync PRs" \
             --color "0e8a16" \
             || echo "Label already exists"
@@ -64,13 +65,12 @@ jobs:
             exit 0
           fi
 
-          # Look for any existing PR (open OR closed) for this head branch
-          EXISTING=$(gh pr list --head sync/upstream --state all \
-            --json number,state --jq '.[0]')
+          EXISTING=$(gh pr list --repo "${{ github.repository }}" \
+            --head sync/upstream --state all --json number,state --jq '.[0]')
 
           if [ -z "$EXISTING" ]; then
-            echo "No existing PR found, creating one."
             gh pr create \
+              --repo "${{ github.repository }}" \
               --head sync/upstream \
               --base main \
               --title "Sync upstream changes" \
@@ -79,12 +79,9 @@ jobs:
           else
             NUMBER=$(echo "$EXISTING" | jq -r '.number')
             STATE=$(echo "$EXISTING" | jq -r '.state')
-            echo "Found PR #$NUMBER with state $STATE"
-
-            if [ "$STATE" = "OPEN" ]; then
-              echo "PR already open, nothing to do (branch was force-pushed with new commits)."
-            elif [ "$STATE" = "CLOSED" ]; then
-              echo "Reopening closed PR #$NUMBER."
-              gh pr reopen "$NUMBER"
+            if [ "$STATE" = "CLOSED" ]; then
+              gh pr reopen "$NUMBER" --repo "${{ github.repository }}"
+            else
+              echo "PR #$NUMBER already open."
             fi
           fi
