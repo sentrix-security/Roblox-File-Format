@@ -43,6 +43,15 @@ jobs:
           # Push the sync branch
           git push -u origin "$SYNC_BRANCH" --force-with-lease
 
+      - name: Ensure label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create upstream-sync \
+            --description "Automated upstream sync PRs" \
+            --color "0e8a16" \
+            || echo "Label already exists"
+
       - name: Create or update PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
