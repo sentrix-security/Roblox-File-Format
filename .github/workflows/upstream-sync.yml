@@ -66,22 +66,34 @@ jobs:
           fi
 
           EXISTING=$(gh pr list --repo "${{ github.repository }}" \
-            --head sync/upstream --state all --json number,state --jq '.[0]')
+            --head sync/upstream --state all --json number,state \
+            --jq 'sort_by(.number) | last')
 
           if [ -z "$EXISTING" ]; then
-            gh pr create \
-              --repo "${{ github.repository }}" \
-              --head sync/upstream \
-              --base main \
-              --title "Sync upstream changes" \
-              --body "Automated PR to bring upstream changes into this fork." \
-              --label upstream-sync
+            STATE="NONE"
           else
-            NUMBER=$(echo "$EXISTING" | jq -r '.number')
             STATE=$(echo "$EXISTING" | jq -r '.state')
-            if [ "$STATE" = "CLOSED" ]; then
-              gh pr reopen "$NUMBER" --repo "${{ github.repository }}"
-            else
-              echo "PR #$NUMBER already open."
-            fi
+            NUMBER=$(echo "$EXISTING" | jq -r '.number')
           fi
+
+          echo "Latest PR state for sync/upstream: $STATE"
+
+          case "$STATE" in
+            OPEN)
+              echo "PR #$NUMBER already open, nothing to do."
+              ;;
+            CLOSED)
+              echo "Reopening closed PR #$NUMBER."
+              gh pr reopen "$NUMBER" --repo "${{ github.repository }}"
+              ;;
+            MERGED|NONE)
+              echo "Creating new PR (previous one was merged or none exists)."
+              gh pr create \
+                --repo "${{ github.repository }}" \
+                --head sync/upstream \
+                --base main \
+                --title "Sync upstream changes" \
+                --body "Automated PR to bring upstream changes into this fork." \
+                --label upstream-sync
+              ;;
+          esac
