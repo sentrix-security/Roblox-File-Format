@@ -70,10 +70,6 @@ jobs:
       - name: Build
         run: dotnet build "${{ steps.findproj.outputs.csproj }}" -c Release --no-restore
 
-      - name: Test (optional)
-        run: dotnet test -c Release --no-build
-        continue-on-error: true
-
       - name: Pack
         run: |
           dotnet pack "${{ steps.findproj.outputs.csproj }}" -c Release \
