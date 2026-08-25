@@ -1,9 +1,13 @@
 name: .NET Core Desktop
-
 on:
   push:
     tags:
       - v* # e.g. v1.0.0
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g. 1.2.3). Required for manual runs.'
+        required: true
 
 jobs:
   publish:
@@ -11,11 +15,9 @@ jobs:
     permissions:
       contents: read
       packages: write
-
     env:
       DOTNET_NOLOGO: true
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,14 +43,17 @@ jobs:
             --password ${{ secrets.GITHUB_TOKEN }} \
             --store-password-in-clear-text
 
-      - name: Determine package version from tag
+      - name: Determine package version
         id: version
         run: |
-          # Tag format: v1.2.3 -> 1.2.3
-          ver="${GITHUB_REF_NAME#v}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            ver="${{ github.event.inputs.version }}"
+          else
+            # Tag format: v1.2.3 -> 1.2.3
+            ver="${GITHUB_REF_NAME#v}"
+          fi
           echo "version=$ver" >> "$GITHUB_OUTPUT"
 
-      
       - name: Locate csproj
         id: findproj
         run: |
