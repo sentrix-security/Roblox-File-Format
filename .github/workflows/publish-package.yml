@@ -74,6 +74,7 @@ jobs:
       - name: Pack
         run: |
           dotnet pack "${{ steps.findproj.outputs.csproj }}" -c Release \
+            --no-restore \
             -o ./nupkgs \
             -p:PackageVersion=${{ steps.version.outputs.version }} \
             -p:ContinuousIntegrationBuild=true \
