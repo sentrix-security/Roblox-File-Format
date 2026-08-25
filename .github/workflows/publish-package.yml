@@ -58,6 +58,7 @@ jobs:
         id: findproj
         run: |
           file=$(git ls-files | grep -E '/?RobloxFileFormat\.csproj$' | head -n1)
+          echo "Found: $file" # add this
           if [ -z "$file" ]; then
             echo "RobloxFileFormat.csproj not found." >&2
             exit 1
