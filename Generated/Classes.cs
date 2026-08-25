@@ -1,5 +1,5 @@
 // Auto-generated list of creatable Roblox classes.
-// Updated as of 0.735.19.7351131
+// Updated as of 0.736.0.7361342
 
 using System;
 
@@ -536,6 +536,7 @@ namespace RobloxFiles
         public bool EnableSitting;
         public bool EnableSprinting;
         public bool EnableSwimming;
+        public bool EnableTurning;
     }
 
     public class AvatarAccessoryRules : Instance
@@ -2106,6 +2107,9 @@ namespace RobloxFiles
     {
         public bool AutoLocalize = true;
         public Color3 Color3 = new Color3(1, 1, 1);
+        public Content EmissiveMaskContent = Content.None;
+        public float EmissiveStrength = 1;
+        public Color3 EmissiveTint = new Color3(1, 1, 1);
 
         public ContentId MetalnessMap
         {
@@ -6029,6 +6033,15 @@ namespace RobloxFiles
 
     [RbxService]
     public class StartupMessageService : Instance
+    {
+    }
+
+    public class StateMachineDefinition : Instance
+    {
+        public string NodeId = "";
+    }
+
+    public class StateMachineTransitionDefinition : Instance
     {
     }
 

@@ -1,5 +1,5 @@
 // Auto-generated list of Roblox enums.
-// Updated as of 0.735.0.7351131
+// Updated as of 0.736.0.7361342
 using System;
 
 namespace RobloxFiles.Enums
@@ -298,6 +298,12 @@ namespace RobloxFiles.Enums
         CrossFade,
         InertialBlend,
         DeadBlend,
+    }
+
+    public enum AnimationNodeTransitionWhen
+    {
+        Finished,
+        BeforeFinished,
     }
 
     public enum AnimationNodeType
@@ -1239,7 +1245,7 @@ namespace RobloxFiles.Enums
         Hull,
         Box,
         PreciseConvexDecomposition,
-        Scalable,
+        Tunable,
     }
 
     public enum CommandPermission
@@ -2421,6 +2427,7 @@ namespace RobloxFiles.Enums
         Success,
         Pending,
         Failed,
+        Filtered,
     }
 
     [Obsolete]
