@@ -1,5 +1,5 @@
 // Auto-generated list of creatable Roblox classes.
-// Updated as of 0.736.0.7361342
+// Updated as of 0.736.0.7361346
 
 using System;
 
