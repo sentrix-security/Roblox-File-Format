@@ -1,5 +1,5 @@
 // Auto-generated list of creatable Roblox classes.
-// Updated as of 0.736.0.7361346
+// Updated as of 0.737.0.7371584
 
 using System;
 
@@ -1051,6 +1051,16 @@ namespace RobloxFiles
     }
 
     [RbxService]
+    public class WrapContentProvider : CacheableContentProvider
+    {
+    }
+
+    [RbxService]
+    public class CallingService : Instance
+    {
+    }
+
+    [RbxService]
     public class CalloutService : Instance
     {
     }
@@ -1644,6 +1654,11 @@ namespace RobloxFiles
     [RbxService]
     public class ContextActionService : Instance
     {
+    }
+
+    public class ControlState : Instance
+    {
+        public byte[] StateSchema;
     }
 
     public abstract class Controller : Instance
@@ -2411,7 +2426,6 @@ namespace RobloxFiles
         [Obsolete]
         public bool Draggable;
 
-        public InputSink InputSink = InputSink.None;
         public bool Interactable = true;
         public int LayoutOrder = 0;
         public GuiObject NextSelectionDown = null;
@@ -2423,6 +2437,7 @@ namespace RobloxFiles
         public bool Selectable;
         public GuiObject SelectionImageObject = null;
         public int SelectionOrder = 0;
+        public InputSink Sink = InputSink.None;
         public UDim2 Size = new UDim2();
         public SizeConstraint SizeConstraint = SizeConstraint.RelativeXY;
 
@@ -2806,7 +2821,9 @@ namespace RobloxFiles
             ClipsDescendants = false;
         }
 
+        public FontFace FontFace;
         public TextChannel Target = null;
+        public bool UseDefaultFont;
     }
 
     public class VideoDisplay : GuiObject
@@ -4737,7 +4754,12 @@ namespace RobloxFiles
 
     public abstract class WorldRoot : Model
     {
+        public bool AutoSimulate;
         public byte[] CollisionGroupData;
+        public Vector3 GravityDirection = Vector3.zero;
+        public float SimulationRate = 0;
+        public float Wind = 0;
+        public Vector3 WindDirection = Vector3.zero;
     }
 
     [RbxService]
@@ -4789,6 +4811,7 @@ namespace RobloxFiles
         public RolloutState TouchEventsUseCollisionGroups = RolloutState.Default;
         public bool TouchesUseCollisionGroups;
         public RolloutState UseFixedSimulation = RolloutState.Default;
+        public RolloutState UseInputSink = RolloutState.Default;
         public RolloutState UseNewLuauTypeSolver = RolloutState.Default;
         public RolloutState ValidateEnabledProximityPrompt = RolloutState.Default;
     }
@@ -5037,11 +5060,6 @@ namespace RobloxFiles
     [RbxService]
     public class PlatformLibraries : Instance
     {
-    }
-
-    public class PlayerControlState : Instance
-    {
-        public byte[] StateSchema;
     }
 
     [RbxService]

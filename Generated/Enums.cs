@@ -606,6 +606,12 @@ namespace RobloxFiles.Enums
         Instance,
     }
 
+    public enum AudioSampleFormat
+    {
+        Int16,
+        Float32,
+    }
+
     public enum AudioSimulationFidelity
     {
         None,
@@ -883,6 +889,13 @@ namespace RobloxFiles.Enums
         Top = Y,
     }
 
+    public enum BasicMeshPartShape
+    {
+        Capsule = 5,
+        Cone,
+        RoundedBox,
+    }
+
     public enum BenefitType
     {
         DeveloperProduct,
@@ -954,6 +967,14 @@ namespace RobloxFiles.Enums
         Outer,
         Center,
         Inner,
+    }
+
+    public enum BranchStatus
+    {
+        Draft,
+        ReadyToMerge,
+        Merged,
+        Archived,
     }
 
     public enum BreakReason
@@ -3638,6 +3659,21 @@ namespace RobloxFiles.Enums
         Premium,
     }
 
+    public enum MergeResolution
+    {
+        None,
+        UseSource,
+        UseTarget,
+        Manual,
+    }
+
+    public enum MergeStatus
+    {
+        None,
+        Loading,
+        Merging,
+    }
+
     public enum MeshAttribute
     {
         Vertex,
@@ -4341,6 +4377,20 @@ namespace RobloxFiles.Enums
         UnknownFailure,
     }
 
+    public enum PromptCreatePlatformContentResult
+    {
+        Success = 1,
+        PermissionDenied,
+        Timeout,
+        UploadFailed,
+        NoUserInput,
+        UnknownFailure,
+        UGCValidationFailed,
+        ModeratedName,
+        PurchaseFailure,
+        TokenInvalid,
+    }
+
     public enum PromptExperienceDetailsResult
     {
         PromptClosed,
@@ -4961,6 +5011,12 @@ namespace RobloxFiles.Enums
         Always,
     }
 
+    public enum ScrollState
+    {
+        Idle,
+        Scrolling,
+    }
+
     public enum ScrollingDirection
     {
         X = 1,
@@ -5124,21 +5180,18 @@ namespace RobloxFiles.Enums
     public enum SlimTintMode
     {
         None,
-        LOD,
+        LevelOfDetail,
         Meshes,
         MeshResourcePtr,
         ContentId,
-        Zone,
+        DataModelState,
         TranscoderStatus,
     }
 
     public enum SlimTranscoderStatus
     {
         Unknown,
-        NoHash,
-        NotUploaded,
-        Uploaded,
-        InProgress,
+        Transcoding,
         Succeeded,
         Failed,
     }
@@ -5148,13 +5201,6 @@ namespace RobloxFiles.Enums
         Player,
         Editor,
         ImGui,
-    }
-
-    public enum SolidPrimitiveType
-    {
-        Capsule = 5,
-        Cone,
-        RoundedBox,
     }
 
     public enum SolverConvergenceMetricType
@@ -5695,6 +5741,7 @@ namespace RobloxFiles.Enums
         TeleportToVIPServer,
         TeleportToInstanceBack,
         TeleportUnknown,
+        Teleport,
     }
 
     public enum TeleportResult
