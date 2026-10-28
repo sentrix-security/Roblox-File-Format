@@ -18,70 +18,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Add upstream and fetch
         run: |
           git remote add upstream https://github.com/MaximumADHD/Roblox-File-Format.git
           git fetch upstream --prune
 
-      - name: Update sync branch to match upstream
-        run: |
-          UPSTREAM_BRANCH="main"
-          SYNC_BRANCH="sync/upstream"
-
-          # Make the sync branch an exact copy of upstream (no merge, so no conflicts here)
-          git push origin "refs/remotes/upstream/$UPSTREAM_BRANCH:refs/heads/$SYNC_BRANCH" --force
-
-      - name: Ensure label exists
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh label create upstream-sync \
-            --repo "${{ github.repository }}" \
-            --description "Automated upstream sync PRs" \
-            --color "0e8a16" \
-            || echo "Label already exists"
-
-      - name: Create or update PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          AHEAD=$(git rev-list --count origin/main..upstream/main)
-          echo "upstream/main is $AHEAD commits ahead of main"
-
-          if [ "$AHEAD" -eq 0 ]; then
-            echo "Nothing to sync, skipping PR."
-            exit 0
-          fi
-
-          EXISTING=$(gh pr list --repo "${{ github.repository }}" \
-            --head sync/upstream --state all --json number,state \
-            --jq 'sort_by(.number) | last')
-
-          if [ -z "$EXISTING" ]; then
-            STATE="NONE"
-          else
-            STATE=$(echo "$EXISTING" | jq -r '.state')
-            NUMBER=$(echo "$EXISTING" | jq -r '.number')
-          fi
-
-          echo "Latest PR state for sync/upstream: $STATE"
-
-          case "$STATE" in
-            OPEN)
-              echo "PR #$NUMBER already open, nothing to do."
-              ;;
-            CLOSED)
-              echo "Reopening closed PR #$NUMBER."
-              gh pr reopen "$NUMBER" --repo "${{ github.repository }}"
-              ;;
-            MERGED|NONE)
-              echo "Creating new PR (previous one was merged or none exists)."
-              gh pr create \
-                --repo "${{ github.repository }}" \
-                --head sync/upstream \
-                --base main \
-                --title "Sync upstream changes" \
-                --body "Automated PR to bring upstream changes into this fork." \
-                --label upstream-sync
-              ;;
-          esac
+      - name: Build sync branch
