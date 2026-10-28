@@ -1,3 +1,9 @@
+> [!WARNING]
+> **This fork is obsolete.**
+> The original repository, [MaximumADHD/Roblox-File-Format](https://github.com/MaximumADHD/Roblox-File-Format), now supports **.NET 10**, which is what this fork was maintained for. Please use the upstream repo instead.
+
+---
+
 # Roblox-File-Format
 A C# library designed to make it easy to create and manipulate files in Roblox's model/place file format!
 
